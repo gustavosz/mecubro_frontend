@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Examen Frontend</title>
+</head>
+<body>
+<div class="container" style="margin-top: 2%;">
+    <div id="app">
+        <h2>NEW CONTACT</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div v-if="errors.length" class="alert alert-danger" role="alert">
+                    <h5 class="alert-heading">Error!</h5>
+                    Corrige los siguientes errores:
+                    <ul>
+                        <li v-for="error in errors">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <input type="text" v-model="newContact.first_name" class="form-control" placeholder="First Name"/>
+            </div>
+            <div class="col-md-3 form-group">
+                <input type="text" v-model="newContact.last_name" class="form-control" placeholder="Last Name"/>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <input type="text" v-model="newContact.birth_day" class="form-control" placeholder="Date of Birth"/>
+            </div>
+            <div class="col-md-3 form-group">
+                <input type="text" v-model="newContact.phone" class="form-control" placeholder="Phone Number"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <select id="country_id" v-model="newContact.country" class="form-control"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button type="button" @click="addContact" class="btn btn-secondary">Add Contact</button>
+            </div>
+        </div>
+        <hr>
+        <h2>CONTACT LIST</h2>
+        <div class="row table-responsive">
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover display responsive no-wrap" width="100%">
+                    <thead>
+                        <th>Person</th>
+                        <th>Date of Birth</th>
+                        <th>Phone Number</th>
+                        <th>Country</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <template v-if="contacts.length">
+                            <tr v-for="contact in contacts">
+                                <td v-text="contact.last_name + ' ' + contact.first_name"></td>
+                                <td v-text="contact.birth_day"></td>
+                                <td v-text="contact.phone"></td>
+                                <td v-text="contact.country"></td>
+                                <td>
+                                    <button type="button" @click="deleteContact(contact)" class="btn btn-secondary">Eliminar</button>
+                                </td>
+                            </tr>
+                        </template>
+                        <template v-else>
+                            <tr><td colspan="5">No hay registros de contactos.</td></tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

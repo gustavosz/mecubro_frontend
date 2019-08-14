@@ -40,6 +40,8 @@ new Vue({
                 this.newContact.phone = '';
                 this.newContact.country = '(AR) Argentina';
 
+                this.errors = [];
+
                 return true;
             }
 
